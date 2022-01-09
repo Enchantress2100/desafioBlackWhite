@@ -43,9 +43,9 @@ const url = require('url');
 
 
                         //que jimp rescate la informacion del formulario y la muestre
-                    //referencia: https://toppercan.es/wp-content/uploads/chihuahuas.jpg
+                    //referencia: https://toppercan.es/wp-content/uploads/chihuahuas.jpg (funciono con esta imagen)
                     
-                    if (req.url == '/resultado') {
+                    if (req.url.includes ('/resultado')) {
                         Jimp.read(direccion, function (err, imagen) {
                         if (err) throw err;
                             imagen
