@@ -19,10 +19,6 @@ const url = require('url');
         (args) => {
             if (args.key == key) {
                 http.createServer((req, res) => {
-                    //parametros url
-                    const params = url.parse(req.url, true).query
-                    const direccion = params.direccion
-                    const imagen=params.imagen
 
                     //leer el HTML
                     if (req.url == '/') {
@@ -39,24 +35,32 @@ const url = require('url');
                             res.end(css)
                         })
                     }
+
+                    //parametros url (la direccion solicitada se imprime por consola como prueba)
+                    const params = url.parse(req.url, true).query
+                    const direccion = params.direccion
+                    console.log(direccion)
+
+
                         //que jimp rescate la informacion del formulario y la muestre
+                    //referencia: https://toppercan.es/wp-content/uploads/chihuahuas.jpg
                     
-                    if (req.url == '/resultado') {
-                    Jimp.read(direccion, (err, imagen) => {
+                    //if (req.url == '/resultado') {
+                        Jimp.read(direccion, function (err, imagen) {
                         if (err) throw err;
                             imagen
-                            .resize(350, Jimp.AUTO)
+                            .resize(300, Jimp.AUTO)
                             .quality(60)
                             .grayscale()
                             .writeAsync('newImg.jpg')
                             .then(() => {
                                 fs.readFile('newImg.jpg', (err, Imagen) => {
-                                res.writeHead(200, { 'Content-Type': 'image/jpg' })
+                                res.writeHead(300, { 'Content-Type': 'image/jpeg' })
                                 res.end(Imagen) 
                                 }) 
                             }) 
                     })
-                }   
+                //}   
                 }).listen(3000, () => console.log('Servidor ON y funcionando OK'))
             } else {
                 console.log('clave incorrecta')
