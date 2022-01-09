@@ -45,7 +45,7 @@ const url = require('url');
                         //que jimp rescate la informacion del formulario y la muestre
                     //referencia: https://toppercan.es/wp-content/uploads/chihuahuas.jpg
                     
-                    //if (req.url == '/resultado') {
+                    if (req.url == '/resultado') {
                         Jimp.read(direccion, function (err, imagen) {
                         if (err) throw err;
                             imagen
@@ -60,7 +60,7 @@ const url = require('url');
                                 }) 
                             }) 
                     })
-                //}   
+                }   
                 }).listen(3000, () => console.log('Servidor ON y funcionando OK'))
             } else {
                 console.log('clave incorrecta')
